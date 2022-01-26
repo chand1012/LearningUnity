@@ -5,14 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private const int movementSpeed = 5;
-    private const int jumpVelocity = 10;
-    private const float jumpDuration = 0.1f;
-    private float jumpTimer = 0.0f;
+    private const int jumpForce = 5;
     private bool canJump = false;
+    private Rigidbody2D rigidBody;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidBody = GetComponents<Rigidbody2D>()[0];
     }
 
     // Update is called once per frame
@@ -26,16 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (jump && canJump)
         {
-            jumpTimer = Time.time + jumpDuration;
+            rigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             canJump = false;
         }
-
-        if (jumpTimer > Time.time && !canJump)
-        {
-            transform.position += new Vector3(0, 1, 0) * Time.deltaTime * jumpVelocity;
-        }
-        
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -45,6 +37,4 @@ public class PlayerMovement : MonoBehaviour
             canJump = true;
         }
     }
-
-
 }
