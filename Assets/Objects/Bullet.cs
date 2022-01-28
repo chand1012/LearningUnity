@@ -5,9 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     //public bool harmPlayer = false;
-    public float dx = 0.0f;
+    public float dx = 100f;
     public float dy = 0.0f;
     //private Rigidbody2D rigidBody;
+    const int movementSpeed = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class Bullet : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(Bullet);
+        
     }
 
     public void SetVelocity(float deltaX, float deltaY)
